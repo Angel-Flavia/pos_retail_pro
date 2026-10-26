@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 decoration: BoxDecoration( 
                   color: AppColors.primary, 
                   borderRadius: BorderRadius.circular(24), 
-                  boxShadow: [BoxShadow(color: AppColors.primary.withOpacity(0.3), blurRadius: 20, 
+                  boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 20, 
 offset: const Offset(0, 10))], 
                 ), 
                 child: const Icon(Icons.shopping_cart_outlined, size: 56, color: Colors.white), 

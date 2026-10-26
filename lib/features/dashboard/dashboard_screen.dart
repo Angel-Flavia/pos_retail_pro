@@ -24,8 +24,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final products = await DatabaseHelper.instance.getProducts(); 
     final allSales = await DatabaseHelper.instance.getSales(); 
     if (!mounted) return; 
-    setState(() { _todaySales = sales; _productCount = products.length; _salesCount = 
-allSales.length; }); 
+    setState(() {  
+      _todaySales = sales;  
+      _productCount = products.length;  
+      _salesCount = allSales.length;  
+    }); 
   } 
  
   @override 
@@ -43,15 +46,22 @@ allSales.length; });
               crossAxisAlignment: CrossAxisAlignment.start, 
               children: [ 
                 Row(children: [ 
-                  Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: 
-[Text('Good Morning,', style: Theme.of(context).textTheme.bodyMedium), Text('Business 
-Owner', style: Theme.of(context).textTheme.headlineMedium)])), 
+                  Expanded( 
+                    child: Column( 
+                      crossAxisAlignment: CrossAxisAlignment.start,  
+                      children: [ 
+                        Text('Good Morning,', style: Theme.of(context).textTheme.bodyMedium),  
+                        Text('Business Owner', style: Theme.of(context).textTheme.headlineMedium) 
+                      ] 
+                    ) 
+                  ), 
                   IconButton(icon: const Icon(Icons.settings), onPressed: () => 
 context.push(AppRoutes.settings)), 
                 ]), 
                 const SizedBox(height: 24), 
                 Container( 
-                  width: double.infinity, padding: const EdgeInsets.all(20), 
+                  width: double.infinity,  
+                  padding: const EdgeInsets.all(20), 
                   decoration: BoxDecoration(color: AppColors.primary, borderRadius: 
 BorderRadius.circular(16)), 
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [ 
@@ -108,9 +118,12 @@ border: Border.all(color: AppColors.border)),
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), 
 border: Border.all(color: AppColors.border)), 
           child: Row(children: [ 
-            Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: 
-color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)), child: Icon(icon, color: 
-color)), 
+            Container( 
+              padding: const EdgeInsets.all(10),  
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: 
+BorderRadius.circular(10)),  
+              child: Icon(icon, color: color) 
+            ), 
             const SizedBox(width: 16), 
             Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)), 
             const Spacer(), 

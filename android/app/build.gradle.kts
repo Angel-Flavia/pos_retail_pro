@@ -4,6 +4,12 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+tasks.configureEach {
+    if (name == "stripDebugSymbols") {
+        enabled = false
+    }
+}
+
 android {
     namespace = "com.example.pos_retail_pro"
     compileSdk = flutter.compileSdkVersion

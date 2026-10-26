@@ -58,8 +58,9 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
     for (var e in _cart.entries) { await DatabaseHelper.instance.decreaseStock(e.key, e.value); } 
      
     if (!mounted) return; 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sale 
-Complete!'), backgroundColor: AppColors.success)); 
+    ScaffoldMessenger.of(context).showSnackBar( 
+      const SnackBar(content: Text('Sale Complete!'), backgroundColor: AppColors.success) 
+    ); 
     context.pop(); 
   } 
  
@@ -78,12 +79,24 @@ Complete!'), backgroundColor: AppColors.success));
                 title: Text(p['name']), 
                 subtitle: Text('UGX ${fmt.format(p['price'])}'), 
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [ 
-                  IconButton(icon: const Icon(Icons.remove_circle_outline), onPressed: () => 
-setState(() { if (_cart.containsKey(p['id'])) { _cart[p['id']] = _cart[p['id']]! - 1; if (_cart[p['id']] == 0) 
-_cart.remove(p['id']); } })), 
+                  IconButton( 
+                    icon: const Icon(Icons.remove_circle_outline),  
+                    onPressed: () => setState(() {  
+                      if (_cart.containsKey(p['id'])) {  
+                        _cart[p['id']] = _cart[p['id']]! - 1;  
+                        if (_cart[p['id']] == 0) _cart.remove(p['id']);  
+                      }  
+                    }) 
+                  ), 
                   Text('${_cart[p['id']] ?? 0}'), 
-                  IconButton(icon: const Icon(Icons.add_circle_outline), onPressed: () => setState(() { 
-if ((p['stock'] as int) > (_cart[p['id']] ?? 0)) { _cart[p['id']] = (_cart[p['id']] ?? 0) + 1; } })), 
+                  IconButton( 
+                    icon: const Icon(Icons.add_circle_outline),  
+                    onPressed: () => setState(() {  
+                      if ((p['stock'] as int) > (_cart[p['id']] ?? 0)) {  
+                        _cart[p['id']] = (_cart[p['id']] ?? 0) + 1;  
+                      }  
+                    }) 
+                  ), 
                 ]), 
               ), 
             ); 
@@ -94,16 +107,24 @@ if ((p['stock'] as int) > (_cart[p['id']] ?? 0)) { _cart[p['id']] = (_cart[p['id
           child: Column(children: [ 
             const Text('Cart', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)), 
             const Divider(), 
-            Expanded(child: ListView(children: _cart.entries.map((e) { final p = 
-_products.firstWhere((x) => x['id'] == e.key); return Text('${e.value}x ${p['name']}'); }).toList())), 
+            Expanded(child: ListView(children: _cart.entries.map((e) {  
+              final p = _products.firstWhere((x) => x['id'] == e.key);  
+              return Text('${e.value}x ${p['name']}');  
+            }).toList())), 
             const Divider(), 
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const 
-Text('Subtotal:'), Text('UGX ${fmt.format(_subtotal)}')]), 
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const Text('Tax 
-(18%):'), Text('UGX ${fmt.format(_subtotal * 0.18)}')]), 
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [const 
-Text('Total:', style: TextStyle(fontWeight: FontWeight.bold)), Text('UGX ${fmt.format(_subtotal * 
-1.18)}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary))]), 
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [ 
+              const Text('Subtotal:'),  
+              Text('UGX ${fmt.format(_subtotal)}') 
+            ]), 
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [ 
+              const Text('Tax (18%):'),  
+              Text('UGX ${fmt.format(_subtotal * 0.18)}') 
+            ]), 
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [ 
+              const Text('Total:', style: TextStyle(fontWeight: FontWeight.bold)),  
+              Text('UGX ${fmt.format(_subtotal * 1.18)}', style: const TextStyle(fontWeight: 
+FontWeight.bold, color: AppColors.primary)) 
+            ]), 
             const SizedBox(height: 16), 
             ElevatedButton( 
               onPressed: _cart.isEmpty || _processing ? null : _checkout, 
